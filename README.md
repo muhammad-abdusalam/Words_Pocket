@@ -9,7 +9,9 @@
 
 ### Live Screenshot
 
-![Desktop-view](./screenshot/desktop-view.png)
+![Desktop-view](./screenshot/img-1.png)
+![Desktop-view](./screenshot/img-2.png)
+![Desktop-view](./screenshot/img-3.png)
 
 ### Demo:
 
