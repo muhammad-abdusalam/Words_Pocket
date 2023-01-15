@@ -54,6 +54,8 @@ section form textarea {
   resize: none;
   padding: 10px;
   font-size: 1.2rem;
+  text-align: center;
+  line-height: 1.5;
 }
 section form textarea:focus {
   outline: none;
@@ -78,6 +80,8 @@ section form .clear:hover {
 }
 section form .words-count {
   font-size: 1.3rem;
+  text-align: center;
+  line-height: 1.5;
 }
 section form #new-words {
   margin-bottom: 20px;
