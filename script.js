@@ -1,6 +1,6 @@
 const inputField = document.querySelector("#input-filed");
 
-const splitBtn = document.querySelector(".split");
+const pickUpBtn = document.querySelector(".pick");
 
 const wordsCount = document.querySelector(".words-count span");
 
@@ -12,19 +12,22 @@ let allWords = [];
 let currentWords = [];
 let newWords = [];
 let storageObj = {};
+let wordRegEx = /[a-z]+((\'||\-)?[a-z]+)?/gi;
 
 window.onload = function () {
-  if (localStorage.getItem("words3")) {
-    allWords = window.localStorage.getItem("words3").split(",");
+  if (localStorage.getItem("all-words")) {
+    allWords = window.localStorage.getItem("all-words").split(",");
     addNewWords();
   }
 };
-splitBtn.onclick = function () {
+pickUpBtn.onclick = function () {
   if (inputField.value !== "") {
     // Get Words Only
-    currentWords = inputField.value.match(/[a-z]+((\'||\-)?[a-z]+)?/gi);
+    currentWords = inputField.value.match(wordRegEx);
     if (currentWords !== null) {
-      currentWords = currentWords.map((word) => word.toLowerCase());
+      currentWords = currentWords.map(function (word) {
+        return word.toLowerCase();
+      });
 
       allWords.push(...currentWords);
 
@@ -32,12 +35,12 @@ splitBtn.onclick = function () {
 
       inputField.value = "";
 
-      window.localStorage.setItem("words3", newWords);
+      window.localStorage.setItem("all-words", newWords);
     }
   }
 };
 clearBtn.onclick = function () {
-  window.localStorage.setItem("words3", []);
+  window.localStorage.setItem("all-words", []);
   window.localStorage.setItem("finished-words", []);
   allWords = [];
   currentWords = [];
@@ -49,7 +52,8 @@ clearBtn.onclick = function () {
 
 // Functions
 function addNewWords() {
-  newWords = Array.from(new Set(allWords));
+  let noRepeated = new Set(allWords);
+  newWords = Array.from(noRepeated);
 
   wordsCount.innerHTML = newWords.length;
 

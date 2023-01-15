@@ -43,7 +43,7 @@ section form label {
   margin-bottom: 5px;
 }
 section form textarea,
-section form .split,
+section form .pick,
 section form .clear,
 section form .words-count {
   margin-bottom: 20px;
@@ -58,7 +58,7 @@ section form textarea {
 section form textarea:focus {
   outline: none;
 }
-section form .split,
+section form .pick,
 section form .clear {
   border: 2px solid #111;
   background-color: #fff;
@@ -69,8 +69,9 @@ section form .clear {
   cursor: pointer;
   transition: 0.5s;
   user-select: none;
+  text-transform: uppercase;
 }
-section form .split:hover,
+section form .pick:hover,
 section form .clear:hover {
   background-color: #111;
   color: #fff;
