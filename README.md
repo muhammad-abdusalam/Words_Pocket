@@ -21,7 +21,7 @@ https://muhammad-adam778.github.io/Pick-up-new-words/
 
 - HTML5 (Semantic)
 - CSS (Flexbox)
-- JS
+- JS (LocalStorage)
 
 ### Author
 
