@@ -1,4 +1,4 @@
-# Pick Up New Words (For English Learners)
+# Words Pocket (For English Learners)
 
 **Paste your text, the repeated words will be deleted and saved in your pocket so you can memorize them when you want.**
 
@@ -15,7 +15,7 @@
 
 ### Demo:
 
-https://muhammad-adam778.github.io/Pick-up-new-words/
+https: https://muhammad-adam778.github.io/Words_Pocket/
 
 ### Built with ⚒️
 
