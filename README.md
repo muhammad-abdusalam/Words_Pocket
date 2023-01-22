@@ -13,15 +13,11 @@
 ![Desktop-view](./screenshot/img-2.png)
 ![Desktop-view](./screenshot/img-3.png)
 
-### Demo:
-
-https: https://muhammad-adam778.github.io/Words_Pocket/
-
 ### Built with ⚒️
 
-- HTML5 (Semantic)
-- CSS (Flexbox)
-- JS (LocalStorage)
+- HTML5
+- CSS
+- JS
 
 ### Author
 
