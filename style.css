@@ -116,7 +116,7 @@ section.container form button.copy {
   font-weight: bold;
   opacity: 0;
 }
-section.container form button.save {
+section.container form button.download-pocket {
   padding: 12px 25px;
 }
 section.container form button:not(.no-hover):hover {
