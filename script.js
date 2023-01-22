@@ -9,7 +9,7 @@ const outputField = document.querySelector("#output-field");
 const clearPocket = document.querySelector(".clear-pocket");
 
 const copyBtn = document.querySelector(".copy");
-const saveBtn = document.querySelector(".save");
+const downloadBtn = document.querySelector(".download-pocket");
 
 const popup = document.querySelector(".popup-container");
 const popupButtons = document.querySelectorAll(".response button");
@@ -47,15 +47,17 @@ pickUpBtn.onclick = function () {
 copyBtn.onclick = function () {
   copyNewWords();
 };
-saveBtn.onclick = function () {
+downloadBtn.onclick = function () {
   downloadPocket();
 };
 clearInput.onclick = function () {
   emptyInputArea();
 };
 clearPocket.onclick = function () {
-  showPopup();
-  confirmToDelete();
+  if (outputField.value !== "") {
+    showPopup();
+    confirmToDelete();
+  }
 };
 disableBtnHover();
 
