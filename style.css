@@ -3,6 +3,9 @@
   margin: 0;
   padding: 0;
 }
+html {
+  cursor: auto;
+}
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 15px;
@@ -20,87 +23,168 @@ main {
   padding: 50px;
   padding-bottom: 0px;
 }
-section {
+section.container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-section h1 {
+section.container h1 {
   font-size: 2rem;
   margin-bottom: 25px;
   text-transform: capitalize;
   text-align: center;
 }
-section form {
+section.container form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
-section form label {
-  font-size: 1.3rem;
+section.container form label {
+  font-size: 1.4rem;
   text-align: center;
   margin-bottom: 5px;
+  font-weight: bold;
 }
-section form textarea,
-section form .pick,
-section form .clear,
-section form .words-count {
+section.container form textarea,
+section.container form button,
+section.container form .words-count {
   margin-bottom: 20px;
 }
-section form textarea {
+section.container form textarea {
   width: 100%;
   height: 250px;
   resize: none;
   padding: 10px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-align: center;
   line-height: 1.5;
+  color: #333;
+  border-color: #333;
 }
-section form textarea:focus {
+section.container form textarea:focus {
   outline: none;
 }
-section form .pick,
-section form .clear {
+section.container form div.input,
+section.container form div.output {
+  width: 100%;
+  position: relative;
+}
+section.container form textarea#output-field {
+  text-transform: capitalize;
+  padding: 30px 25px;
+  font-weight: bold;
+}
+section.container form textarea#input-field:hover + button,
+section.container form textarea#output-field:hover + button {
+  opacity: 1;
+}
+section.container form button:not(.copy) {
   border: 2px solid #111;
   background-color: #fff;
   padding: 15px 40px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 1px;
   cursor: pointer;
   transition: 0.5s;
   user-select: none;
   text-transform: uppercase;
+  color: #111;
 }
-section form .pick:hover,
-section form .clear:hover {
+section.container form button.clear-input {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 1rem;
+  padding: 0 5px;
+  margin: 0;
+  text-transform: lowercase;
+  opacity: 0;
+}
+section.container form button.copy {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+  user-select: none;
+  border: 2px solid #111;
+  color: #111;
+  background-color: #fff;
+  padding: 3px 6px;
+  font-weight: bold;
+  opacity: 0;
+}
+section.container form button.save {
+  padding: 12px 25px;
+}
+section.container form button:not(.no-hover):hover {
   background-color: #111;
   color: #fff;
 }
-section form .words-count {
+section.container form .clear-input:not(.no-hover):hover,
+section.container form .copy:not(.no-hover):hover {
+  opacity: 1;
+}
+section.container form .words-count {
   font-size: 1.3rem;
   text-align: center;
   line-height: 1.5;
 }
-section form #new-words {
-  margin-bottom: 20px;
+/* Empty Pocket Popup */
+section.container .popup-container {
+  position: fixed;
+  z-index: 99999;
+  background-color: rgb(0 0 0 / 33%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  display: none;
 }
-section form #new-words div {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 25px;
-  text-transform: capitalize;
-  font-size: 1.3rem;
+section.container .popup-container .popup {
+  background-color: #fff;
   border-radius: 6px;
-  cursor: pointer;
-  transition: 0.4s;
+  padding: 30px;
+  margin: 0 25px;
+  text-align: center;
 }
-div.finished {
-  background-color: #aaa !important;
-  color: #eee !important;
+section.container .popup-container .popup p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+@media (max-width: 634px) {
+  section.container .popup-container .popup p br {
+    display: none;
+  }
+}
+section.container .popup-container .popup .response {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 30px;
+}
+section.container .popup-container .popup .response button {
+  border: 2px solid #111;
+  background-color: #fff;
+  padding: 10px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.5s;
+  user-select: none;
+  color: #111;
+}
+section.container .popup-container .popup .response button:hover {
+  background-color: #111;
+  color: #fff;
 }

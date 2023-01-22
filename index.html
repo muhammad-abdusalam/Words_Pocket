@@ -16,22 +16,45 @@
   </head>
   <body>
     <main>
-      <section>
-        <h1>Pick up new words</h1>
+      <section class="container">
+        <h1>Pick Up New Words</h1>
         <form action="#">
-          <label class="input-label" for="input-filed"
+          <!-- Input Area -->
+          <label class="input-label" for="input-field"
             >Enter Your Text Here</label
           >
-          <textarea
-            id="input-filed"
-            placeholder="Pick up new words and keep them in your pocket."
-            spellcheck="false"
-          ></textarea>
+          <div class="input">
+            <textarea
+              id="input-field"
+              placeholder="Pick up new words and keep them in your pocket."
+              spellcheck="false"
+            ></textarea>
+            <button class="clear-input">x</button>
+          </div>
           <button class="pick">Pick up</button>
+          <!-- Output Area -->
           <p class="words-count">#<span>0</span> Words in your pocket</p>
-          <article id="new-words"></article>
-          <button class="clear">Empty pocket</button>
+          <label class="input-label" for="output-field">Pocket</label>
+          <div class="output">
+            <textarea id="output-field" spellcheck="false" disabled></textarea>
+            <button class="copy">Copy</button>
+          </div>
+          <button class="save">Download pocket</button>
+          <button class="clear-pocket">Empty pocket</button>
         </form>
+        <!-- Empty Pocket Popup -->
+        <article class="popup-container">
+          <article class="popup">
+            <p>
+              Are you sure you want to delete all the data<br />
+              in your pocket?
+            </p>
+            <section class="response">
+              <button class="yes">Yes</button>
+              <button class="no">No</button>
+            </section>
+          </article>
+        </article>
       </section>
     </main>
     <script src="./script.js"></script>

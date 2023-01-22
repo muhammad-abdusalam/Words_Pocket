@@ -1,22 +1,28 @@
-const inputField = document.querySelector("#input-filed");
+const inputField = document.querySelector("#input-field");
+const clearInput = document.querySelector(".clear-input");
 
 const pickUpBtn = document.querySelector(".pick");
 
 const wordsCount = document.querySelector(".words-count span");
+const outputField = document.querySelector("#output-field");
 
-const newWordsBox = document.querySelector("#new-words");
+const clearPocket = document.querySelector(".clear-pocket");
 
-const clearBtn = document.querySelector(".clear");
+const copyBtn = document.querySelector(".copy");
+const saveBtn = document.querySelector(".save");
+
+const popup = document.querySelector(".popup-container");
+const popupButtons = document.querySelectorAll(".response button");
+const arrayOfPopupButtons = Array.from(popupButtons);
 
 let allWords = [];
 let currentWords = [];
 let newWords = [];
-let storageObj = {};
 let wordRegEx = /[a-z]+((\'||\-)?[a-z]+)?/gi;
 
 window.onload = function () {
-  if (localStorage.getItem("all-words")) {
-    allWords = window.localStorage.getItem("all-words").split(",");
+  if (localStorage.getItem("new-words")) {
+    allWords = window.localStorage.getItem("new-words").split(",");
     addNewWords();
   }
 };
@@ -31,71 +37,112 @@ pickUpBtn.onclick = function () {
 
       allWords.push(...currentWords);
 
+      inputField.value = "";
       addNewWords();
 
-      inputField.value = "";
-
-      window.localStorage.setItem("all-words", newWords);
+      window.localStorage.setItem("new-words", newWords);
     }
   }
 };
-clearBtn.onclick = function () {
-  window.localStorage.setItem("all-words", []);
-  window.localStorage.setItem("finished-words", []);
-  allWords = [];
-  currentWords = [];
-  newWords = [];
-  storageObj = {};
-  wordsCount.innerHTML = "0";
-  newWordsBox.innerHTML = "";
+copyBtn.onclick = function () {
+  copyNewWords();
 };
+saveBtn.onclick = function () {
+  downloadPocket();
+};
+clearInput.onclick = function () {
+  emptyInputArea();
+};
+clearPocket.onclick = function () {
+  showPopup();
+  confirmToDelete();
+};
+disableBtnHover();
 
 // Functions
 function addNewWords() {
   let noRepeated = new Set(allWords);
   newWords = Array.from(noRepeated);
+  capitalizeFirstLetter(newWords);
 
   wordsCount.innerHTML = newWords.length;
-
-  newWordsBox.innerHTML = "";
-  createWordBox(newWords);
-  getInfoFromStorage();
+  outputField.value = newWords.join(" ");
 }
-function createWordBox(words) {
-  for (let i = 0; i < words.length; i++) {
-    let wordBox = document.createElement("div");
-    let wordText = document.createTextNode(words[i]);
-    wordBox.id = `w-${i}`;
 
-    wordBox.append(wordText);
-    newWordsBox.appendChild(wordBox);
-
-    let arrayOfWords = Array.from(newWordsBox.childNodes);
-    arrayOfWords.forEach(function (word) {
-      checkFinished(word);
-    });
+function capitalizeFirstLetter(array) {
+  let firstLetter;
+  let restOfWord;
+  let allWord;
+  for (let i = 0; i < array.length; i++) {
+    firstLetter = array[i].charAt(0).toUpperCase();
+    restOfWord = array[i].slice(1);
+    allWord = `${firstLetter}${restOfWord}`;
+    array[i] = allWord;
   }
 }
-function checkFinished(word) {
-  word.onclick = function () {
-    if (word.classList.contains("finished")) {
-      this.classList.remove("finished");
-      storageObj[`${word.id}`] = "0";
-    } else {
-      this.classList.add("finished");
-      storageObj[`${word.id}`] = "1";
-    }
-    localStorage.setItem("finished-words", JSON.stringify(storageObj));
-  };
+function copyNewWords() {
+  navigator.clipboard.writeText(outputField.value);
 }
-function getInfoFromStorage() {
-  if (localStorage.getItem("finished-words")) {
-    storageObj = JSON.parse(localStorage.getItem("finished-words"));
-    let arrayOfWords = Array.from(newWordsBox.childNodes);
-    arrayOfWords.forEach(function (word) {
-      if (storageObj[word.id] === "1") {
-        word.classList.add("finished");
+function downloadPocket() {
+  const targetContent = outputField.value;
+  // Create element with <a> tag
+  const link = document.createElement("a");
+
+  // Create a blog object with the file content which you want to add to the file
+  const file = new Blob([targetContent], { type: "text/plain" });
+
+  // Add file content in the object URL
+  link.href = URL.createObjectURL(file);
+
+  // Add file name
+  link.download = "pocket.txt";
+
+  // Add click event to <a> tag to save file.
+  link.click();
+}
+function emptyInputArea() {
+  inputField.value = "";
+}
+function emptyPocket() {
+  window.localStorage.setItem("new-words", []);
+  allWords = [];
+  currentWords = [];
+  newWords = [];
+  wordsCount.innerHTML = "0";
+  outputField.value = "";
+}
+function showPopup() {
+  popup.style.display = "flex";
+}
+function confirmToDelete() {
+  arrayOfPopupButtons[1].focus();
+  arrayOfPopupButtons.forEach(function (btn) {
+    btn.onclick = function () {
+      if (btn.classList.contains("yes")) {
+        emptyPocket();
+        popup.style.display = "none";
+      } else {
+        popup.style.display = "none";
+      }
+    };
+  });
+}
+// This Function Disable Buttons Hover In Touch Devices
+function disableBtnHover() {
+  const allButtons = document.querySelectorAll("button");
+  const arrayOfButtons = Array.from(allButtons);
+
+  arrayOfButtons.forEach(function (btn) {
+    btn.addEventListener("mouseover", function () {
+      if (window.navigator.maxTouchPoints > 0) {
+        arrayOfButtons.forEach(function (btn) {
+          btn.classList.add("no-hover");
+        });
+      } else {
+        arrayOfButtons.forEach(function (btn) {
+          btn.classList.remove("no-hover");
+        });
       }
     });
-  }
+  });
 }
