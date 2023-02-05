@@ -19,7 +19,7 @@ https: https://muhammad-abdusalam.github.io/Words_Pocket/
 
 ### Author
 
-- Linkedin: [@muhammad-adam778](https://www.linkedin.com/in/muhammad-abdusalam/)
+- Linkedin: [@muhammad-abdusalam](https://www.linkedin.com/in/muhammad-abdusalam/)
 
 <hr>
 
